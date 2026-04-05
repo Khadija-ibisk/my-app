@@ -10,7 +10,6 @@
     <version>0.0.12</version>
     <name>my-app</name>
 
-    <!-- Force Maven to use Java 8 even if Jenkins is running Java 21 -->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -19,7 +18,6 @@
 
     <dependencies>
 
-        <!-- Only ONE POI version (cleaned) -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -42,7 +40,6 @@
 
     </dependencies>
 
-    <!-- Nexus deployment config -->
     <distributionManagement>
         <snapshotRepository>
             <id>nexus</id>
@@ -60,7 +57,6 @@
 
         <plugins>
 
-            <!-- MUST use 3.11.0 to support Java 21 toolchain -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -72,7 +68,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Unit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
