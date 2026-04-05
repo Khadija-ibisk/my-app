@@ -1,71 +1,84 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>in.javahome</groupId>
-	<artifactId>myweb</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.12</version>
-	<name>my-app</name>
-	<url>http://maven.apache.org</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<dependencies>
+    <modelVersion>4.0.0</modelVersion>
 
-		
-		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi</artifactId>
-		    <version>4.1.2</version>
-		</dependency>
+    <groupId>in.javahome</groupId>
+    <artifactId>myweb</artifactId>
+    <packaging>war</packaging>
+    <version>0.0.12</version>
+    <name>my-app</name>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-			
-		</dependency>
+    <!-- ✔️ Force Maven to compile in Java 8 even with JDK 21 -->
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.release>8</maven.compiler.release>
+    </properties>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+    <dependencies>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
 
-	<distributionManagement>
-		<snapshotRepository>
-		    <id>nexus</id>
-		    <url>http://172.31.15.236:8081/repository/maven-snapshots/</url>
-		</snapshotRepository>
-		
-		<repository>
-		    <id>nexus</id>
-		    <url>http://172.31.15.236:8081/repository/maven-releases/</url>
-		</repository>
-  	</distributionManagement>
-	
-	<build>
-	 <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.10.1</version>
-            <configuration>
-                <release>8</release>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
 
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-surefire-plugin</artifactId>
-	            <version>2.19</version>
-	        </plugin>
-	    </plugins>
-	</build>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ✔️ For Nexus deployment -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus</id>
+            <url>http://172.31.15.236:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>nexus</id>
+            <url>http://172.31.15.236:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <finalName>myweb</finalName>
+
+        <plugins>
+
+            <!-- ✔️ Correct compiler plugin for JDK 21 + Java 8 target -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                    <release>8</release>
+                </configuration>
+            </plugin>
+
+            <!-- ✔️ Unit testing plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
